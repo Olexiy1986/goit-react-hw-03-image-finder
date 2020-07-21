@@ -17,10 +17,13 @@ class App extends Component {
   componentDidUpdate(prevProps, prevState) {
     const prevQuery = prevState.searchQuery;
     const nextQuery = this.state.searchQuery;
-
     if (prevQuery !== nextQuery) {
       this.fetchArticles();
     }
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth",
+    });
   }
   handleOpenModal = (url) => {
     this.setState({
@@ -50,10 +53,6 @@ class App extends Component {
       .catch((error) => this.setState({ error }))
       .finally(() => {
         this.setState({ loading: false });
-        window.scrollTo({
-          top: document.documentElement.scrollHeight,
-          behavior: "smooth",
-        });
       });
   };
 
